@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -27,7 +28,7 @@ public class FileWriting {
     public static void writeString(String filePath, String content) throws IOException {
         // TODO: 1 - Use Files.writeString(Path.of(filePath), content) to write the content.
         //  This creates the file if it doesn't exist, or overwrites it if it does.
-
+        Files.writeString(Path.of(filePath), content);
     }
 
     /**
@@ -41,7 +42,7 @@ public class FileWriting {
         // TODO: 2 - Use Files.writeString with StandardOpenOption.APPEND to append text.
         //  Add a newline ("\n") before the text so it appears on a new line.
         //  Example: Files.writeString(Path.of(filePath), "\n" + text, StandardOpenOption.APPEND);
-
+        Files.writeString(Path.of(filePath), "\n" + text, StandardOpenOption.APPEND);
     }
 
     /**
@@ -54,7 +55,7 @@ public class FileWriting {
     public static void writeLines(String filePath, List<String> lines) throws IOException {
         // TODO: 3 - Use Files.write(Path.of(filePath), lines) to write all lines.
         //  Each string in the list becomes one line in the file.
-
+        Files.write(Path.of(filePath), lines);
     }
 
     /**
@@ -73,6 +74,13 @@ public class FileWriting {
         //      writer.newLine();
         //      writer.write("Line 3");
         //  }
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))){
+            writer.write("Line 1");
+            writer.newLine();
+            writer.write("Line 2");
+            writer.newLine();
+            writer.write("Line 3");
+        }
 
     }
 
@@ -89,7 +97,8 @@ public class FileWriting {
         //  or Files.copy(Path.of(sourcePath), Path.of(destinationPath)) for a direct copy.
         //  Note: Files.copy will throw if destination already exists unless you add
         //  StandardCopyOption.REPLACE_EXISTING.
-
+        String fileContent = Files.readString(Path.of(sourcePath));
+        Files.writeString(Path.of(destinationPath), fileContent);
     }
 
     /**
@@ -106,7 +115,16 @@ public class FileWriting {
         //  Then, for each row, write the values joined by commas, followed by a newline.
         //  Use StringBuilder or String.join(",", array) to build each line.
         //  Write the complete result using Files.writeString().
-
+        String fHeaders = String.join(",", headers) + "\n";
+        int row = rows.length;
+        int col = rows[0].length;
+        String res = "";
+        for(int i = 0; i < row; i++) {
+            res = res.concat( String.join(",", rows[i]) + "\n");
+        }
+        Path path = Path.of(filePath);
+        Files.writeString(path, fHeaders);
+        Files.writeString(path, res,  StandardOpenOption.APPEND);
     }
 
     public static void main(String[] args) throws IOException {
