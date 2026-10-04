@@ -8,6 +8,9 @@ public class PersonMain {
         Car car = new Car("Honda", "Civic", "black");
         Home home = new Home(111.1, 4, new BigDecimal("1200"));
         Person alex = new Person("Alex", "Lau", "alexlau@email.com", address);
+        Person p1 = new Person();
+        Person p2 = new Person();
+        Person p3 = new Person();
         alex.setCar(car);
         alex.setHome(home);
 
@@ -18,6 +21,8 @@ public class PersonMain {
 
         System.out.println();
         System.out.println(alex);
+        System.out.println(alex.count);
+        System.out.println(p3.count);
 
     }
 }

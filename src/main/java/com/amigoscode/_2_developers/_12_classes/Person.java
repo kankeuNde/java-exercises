@@ -10,7 +10,14 @@ public class Person {
     private Car car;
     private Home home;
 
+    public static int count = 0;
+
+    static{
+        count = 10;
+    }
+
     public Person() {
+        count++;
     }
 
     public Person(String name, String surname, String email, Address address) {
@@ -18,6 +25,7 @@ public class Person {
         this.surname = surname;
         this.email = email;
         this.address = address;
+        count++;
     }
 
     public Person(String name, String surname, String email, Address address, Car car, Home home) {
