@@ -14,6 +14,56 @@ public class ClassesAndObjects {
     //  - A private String field 'name'
     //  - A private int field 'age'
 
+    public static class Person{
+        private String name;
+        private int age;
+
+        public Person(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        public Person(){
+            this("Unknown", 0);
+        }
+
+        @Override
+        public String toString(){
+            return "Person{name=" + name + ", age=" + age + "}";
+        }
+
+        @Override
+        public boolean equals(Object obj){
+            if(obj == this){
+                return true;
+            }
+            if(obj == null || !(obj instanceof Person)){
+                return false;
+            }
+            Person person = (Person)obj;
+            if(this.name.equals(person.getName()) && this.age == person.getAge()){
+                return true;
+            }
+            return false;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+    }
+
 
     // TODO: 2 - Add a constructor to Person that takes String name and int age,
     //  and assigns them to the fields.
@@ -38,6 +88,8 @@ public class ClassesAndObjects {
     //  Also override hashCode() using Objects.hash(name, age).
 
 
+
+
     public static void main(String[] args) {
         // TODO: 6 - Create at least three Person objects:
         //  - One using the two-arg constructor (e.g., "Alice", 30)
@@ -48,6 +100,17 @@ public class ClassesAndObjects {
         //  and person1 with person2 (should be false).
         //  Print the comparison results.
 
+        Person alice = new Person("Alice", 18);
+        Person alicia = new Person("Alice", 18);
+        Person unknown = new Person();
+
+        System.out.println(alice);
+        System.out.println(alicia);
+        System.out.println(unknown);
+
+        System.out.println("Is alice equals to alicia? -> " + alice.equals(alicia));
+        System.out.println("Is alice equals to unknown? -> " + alice.equals(unknown));
+
 
         // TODO: 7 - Demonstrate constructor chaining with this():
         //  Add a comment explaining what constructor chaining is:
@@ -56,5 +119,7 @@ public class ClassesAndObjects {
         //  The no-args constructor you created in TODO 3 already demonstrates this.
         //  Print: "No-args person: " + the no-args person to show the defaults.
 
+        // Constructor chaining is the technique of using one constructor in another to reduce the boilerplate code.
+        // we use the this() keyword to call a constructor in the current class in another constructor.
     }
 }

@@ -13,6 +13,23 @@ public class EnumExercises {
     //  SPRING, SUMMER, AUTUMN, WINTER
     //  For now, just declare them without any fields or methods.
 
+    public enum Season{
+        SPRING("Flowers bloom"),
+    SUMMER("Sun shines"),
+    AUTUMN("Leaves fall"),
+    WINTER("Snow falls");
+
+        private final String description;
+
+        private Season(String description) {
+            this.description = description;
+        }
+
+        public String getDescription(){
+            return this.description;
+        }
+
+    }
 
     // TODO: 2 - Modify the Season enum to add:
     //  - A private final String 'description' field
@@ -35,6 +52,20 @@ public class EnumExercises {
     //  - A constructor that takes an int level
     //  - A getter getLevel()
 
+    public enum Priority{
+        LOW(1),
+        MEDIUM(2),
+        HIGH(3);
+
+        private final int level;
+        private Priority(int level){
+            this.level = level;
+        }
+        public int getLevel(){
+            return this.level;
+        }
+    }
+
 
     public static void main(String[] args) {
         System.out.println("=== Season Switch ===");
@@ -43,12 +74,28 @@ public class EnumExercises {
         //  using the getDescription() method.
         //  Test with Season.SUMMER.
 
+        Season season = Season.SUMMER;
+
+        String description = switch(season){
+            case SPRING -> Season.SPRING.getDescription();
+            case SUMMER -> Season.SUMMER.getDescription();
+            case AUTUMN -> Season.AUTUMN.getDescription();
+            case WINTER -> Season.WINTER.getDescription();
+        };
+        System.out.println(description);
+
+
+
 
         System.out.println("\n=== Iterate Over Enum Values ===");
         // TODO: 6 - Use Season.values() to get an array of all Season constants.
         //  Loop through them and print each one with its description and ordinal.
         //  Example output: "0: SPRING - Flowers bloom"
         //  Also iterate over Priority.values() and print each with its level.
+        Season[] values = Season.values();
+        for (int i = 0; i < values.length; i++) {
+            System.out.println(i + ": " + values[i] + " - " + values[i].getDescription());
+        }
 
     }
 }
