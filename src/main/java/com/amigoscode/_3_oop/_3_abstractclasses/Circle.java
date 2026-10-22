@@ -13,16 +13,19 @@ package com.amigoscode._3_oop._3_abstractclasses;
  */
 
 // TODO: 1 - Make this class extend Shape.
-public class Circle {
+public class Circle extends Shape{
 
     // TODO: 2 - Declare a private field:
     //   - radius (double)
+    private double radius;
 
 
     // TODO: 3 - Create a constructor that takes a radius.
     //   Validate that radius > 0, throwing IllegalArgumentException if not.
     //   Assign the field.
-
+    public Circle(double radius){
+        this.radius = radius;
+    }
 
     // TODO: 4 - Implement the area() method from Shape.
     //   Formula: Math.PI * radius * radius
@@ -36,10 +39,20 @@ public class Circle {
 
     public static void main(String[] args) {
         // Uncomment and test after completing the TODOs:
-        // Circle circle = new Circle(5.0);
-        // System.out.println("Area: " + circle.area());
-        // System.out.println("Perimeter: " + circle.perimeter());
-        // circle.describe();   // inherited concrete method from Shape
-        // System.out.println(circle);
+         Circle circle = new Circle(5.0);
+         System.out.println("Area: " + circle.area());
+         System.out.println("Perimeter: " + circle.perimeter());
+         circle.describe();   // inherited concrete method from Shape
+         System.out.println(circle);
+    }
+
+    @Override
+    public double area() {
+        return Math.PI * radius * radius;
+    }
+
+    @Override
+    public double perimeter() {
+        return 2 * Math.PI * radius;
     }
 }
